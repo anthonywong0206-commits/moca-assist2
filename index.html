@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoCA Assist Professional HK</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="logo">M</div>
+
+      <div>
+        <h1>MoCA Assist</h1>
+        <p>Professional HK</p>
+      </div>
+    </div>
+
+    <button onclick="showPage('dashboard')">
+      工作台
+    </button>
+
+    <button onclick="showPage('client')">
+      長者資料
+    </button>
+
+    <button onclick="showPage('assessment')">
+      HK-MoCA 評估
+    </button>
+
+    <button onclick="showPage('result')">
+      結果 / 匯出
+    </button>
+
+    <button onclick="showPage('history')">
+      歷史紀錄
+    </button>
+
+    <button onclick="toggleDarkMode()">
+      深色模式
+    </button>
+
+    <button onclick="toggleLargeText()">
+      大字模式
+    </button>
+
+    <!-- Timer -->
+    <div class="timer-card">
+
+      <p>評估時間</p>
+
+      <h2 id="timer">
+        00:00
+      </h2>
+
+      <button onclick="toggleTimer()">
+        開始 / 暫停
+      </button>
+
+      <button onclick="resetTimer()">
+        重設
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- Main -->
+  <main>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="page active">
+
+      <div class="card hero">
+
+        <h2>社工／護士 HK-MoCA 工作流</h2>
+
+        <p>
+          長者資料 → 評估 → 自動計分 → 匯出 Word / PDF → 歷史追蹤
+        </p>
+
+      </div>
+
+      <div class="warn">
+        HK-MoCA 題目及圖片屬保密評估材料，
+        請只於已授權及非公開環境使用。
+      </div>
+
+    </section>
+
+    <!-- Client -->
+    <section id="client" class="page">
+
+      <h2>長者基本資料</h2>
+
+      <div class="card grid">
+
+        <input id="name" placeholder="中文姓名" />
+
+        <input id="englishName" placeholder="英文姓名" />
+
+        <input id="gender" placeholder="性別" />
+
+        <input id="age" type="number" placeholder="年齡" />
+
+        <input id="education" type="number" placeholder="教育年數" />
+
+        <input id="assessor" placeholder="評估員姓名" />
+
+        <input id="centre" placeholder="中心 / 單位" />
+
+        <input id="date" type="date" />
+
+      </div>
+
+    </section>
+
+    <!-- Assessment -->
+    <section id="assessment" class="page">
+
+      <div class="scorebar">
+
+        <strong>
+          總分：
+          <span id="totalScore">0</span>/30
+        </strong>
+
+        <span id="percentile">
+          尚未分類
+        </span>
+
+      </div>
+
+      <!-- Assessment Area -->
+      <div id="assessmentArea"></div>
+
+    </section>
+
+    <!-- Result -->
+    <section id="result" class="page">
+
+      <h2>評估結果</h2>
+
+      <div class="card" id="report"></div>
+
+      <button onclick="saveRecord()">
+        儲存紀錄
+      </button>
+
+      <button onclick="exportWord()">
+        匯出 Word
+      </button>
+
+      <button onclick="window.print()">
+        匯出 PDF
+      </button>
+
+      <button class="danger" onclick="clearCurrent()">
+        清除目前評估
+      </button>
+
+      <!-- Chart -->
+      <div class="card">
+
+        <h2>認知變化圖表</h2>
+
+        <canvas id="chart"></canvas>
+
+      </div>
+
+    </section>
+
+    <!-- History -->
+    <section id="history" class="page">
+
+      <h2>歷史紀錄</h2>
+
+      <input
+        id="search"
+        placeholder="搜尋姓名"
+        oninput="renderHistory()"
+      />
+
+      <div id="historyList"></div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
